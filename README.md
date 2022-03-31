@@ -1,8 +1,10 @@
 # aws-ssh-key-lambda-rotation
 
-AWS does not allow to modify the SSH key of EC2 instances, the option they suggest is to recreate the instance with the new key.
+AWS does not allow you to modify the SSH key of EC2 instances, the option they suggest is to recreate the instance with a new key.
 
 This repository provides an automated alternative for SSH key rotation with AWS services.
+
+It allows the generation of Key Pairs and rotation over S3 Buckets, setting the new keys on the machines matching the defined TAG. In addition, it allows key modification when new EC2 machines are provisioned.
 
 ## Diagram
 
