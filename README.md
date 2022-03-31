@@ -5,11 +5,11 @@ AWS does not allow to modify the SSH key of EC2 instances, the option they sugge
 This repository provides an automated alternative for SSH key rotation with AWS services.
 
 ## Diagram
----
+
 ![alt text](img/diagram.png "Title")
 
 ## How to use it
----
+
 * Modify the backend where the tfstate will be stored, in the terraform_config.tf file.
 * Modify the region where our code will be deployed, in the terraform_config.tf file.
 * Package the libraries to use the script in Lambda and upload the .zip file to the S3 bucket `s3://<bucket-name>/dependencies/`
