@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Id": "sqspolicy",
+  "Statement": [
+    {
+      "Sid": "AWSEvents_ssh-rotate-${env}_SendToSQS",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "events.amazonaws.com"
+      },
+      "Action": "sqs:SendMessage",
+      "Resource": "${resource}",
+      "Condition": {
+        "ArnEquals": {
+          "aws:SourceArn": "${conditionResource}"
+        }
+      }
+    }
+  ]
+}

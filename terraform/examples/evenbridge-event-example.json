@@ -1,0 +1,14 @@
+{
+   "version":"0",
+   "id":"86d98c86-11e0-b582-a4c2-c05e3ac5c408",
+   "detail-type":"Scheduled Event",
+   "source":"aws.events",
+   "account":"111222333444",
+   "time":"2022-03-07T08:54:00Z",
+   "region":"eu-west-1",
+   "resources":[
+      "arn:aws:events:eu-west-1:111222333444:rule/ssh-rotate-develop"
+   ],
+   "detail":{
+   }
+}

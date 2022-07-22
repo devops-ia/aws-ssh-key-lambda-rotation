@@ -27,4 +27,14 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+# Lambda Builds
 */builds/*
+
+# SSH Keys
+*.pem
+
+# Zip files
+*.zip
+
+# Virtualenvs
+*/venv/*
