@@ -1,4 +1,14 @@
-# GENERAL
+# Global Config
+variable "my_ip" {
+  description = "My IP"
+  type        = string
+  default     = ""
+}
+variable "region" {
+  description = "The AWS region"
+  type        = string
+  default     = null
+}
 
 variable "tags" {
   description = "Service tags"
@@ -6,78 +16,107 @@ variable "tags" {
   default     = null
 }
 
-# LAMBDA
-variable "lambda_handler" {
-  description = "Lambda handler init"
-  type        = string
-  default     = "main.main"
+variable "tags_rotate" {
+  description = "Service tags"
+  type        = map(string)
+  default     = null
 }
 
-variable "lambda_runtime" {
-  description = "Lambda program runtime"
-  type        = string
-  default     = "python3.8"
+# Enable Testing Resources
+variable "testing_enabled" {
+  description = "Create testing resources"
+  type        = bool
+  default     = false
 }
 
-variable "lambda_timeout" {
-  description = "Lambda timeout"
-  type        = number
-  default     = 60
-}
-
-variable "lambda_s3_prefix" {
-  description = "Bucket S3 Prefix"
-  type        = string
-  default     = "current"
-}
-
-variable "lambda_private_key_name" {
-  description = "Private Key Name"
-  type        = string
-  default     = "tag.pem"
-}
-
-variable "lambda_public_key_name" {
-  description = "Public Key Name"
-  type        = string
-  default     = "tag.pub"
-}
-
-variable "lambda_tag_key" {
-  description = "Tag Key"
-  type        = string
-  default     = "provisioning"
-}
-
-# LAMBDA LAYER
-variable "lambda_layer_package" {
-  description = "Lambda layer package"
-  type        = string
-  default     = "crypto"
-}
-
-variable "lambda_layer_runtime" {
-  description = "List of layer runtime compatible"
-  type        = list(any)
-  default     = ["python3.8", "python3.9"]
-}
-
-# Cloudwatch Logs
-variable "loggroup_ssh_rotate_retention" {
+# AWS Cloudwatch 
+## Logs
+variable "log_group_from_ssm_retention" {
   description = "AWS Cloudwatch Logs Retention for SSM Run Command"
   type        = number
-  default     = 365
+  default     = 30
 }
 
-# SQS
-variable "sqs_delay_seconds" {
-  description = "The time in seconds that the delivery of all messages in the queue will be delayed. An integer from 0 to 900 (15 minutes)"
-  type        = number
-  default     = 60
+## Alarm
+variable "cw_metric_alarm" {
+  description = "AWS Cloudwatch Metric Alarm"
+  type = map(object({
+    complementary_alarm_name        = string
+    comparison_operator             = string
+    evaluation_periods              = number
+    complementary_namespace_name    = string
+    period                          = number
+    statistic                       = string
+    threshold                       = number
+    complementary_alarm_description = string
+    insufficient_data_actions       = list(string)
+    datapoints_to_alarm             = number
+    treat_missing_data              = string
+  }))
+  default = {}
 }
 
-variable "sqs_visibility_timeout_seconds" {
-  description = "The visibility timeout for the queue. An integer from 0 to 43200 (12 hours)"
-  type        = number
-  default     = 180
+# AWS EC2
+
+# AWS EventBridge
+variable "event_rule_deploy_function" {
+  description = "AWS EventBridge Deploy Function"
+  type = map(object({
+    enabled = bool
+  }))
+  default = {}
+}
+
+variable "event_rule_rotate_function" {
+  description = "AWS EventBridge Rotate Function"
+  type = map(object({
+    enabled    = bool
+    expression = string
+  }))
+  default = {}
+}
+
+# AWS Lambda
+variable "lambda_function" {
+  description = "AWS Lambda Function values"
+  type = map(object({
+    lambda_handler          = string
+    lambda_description      = string
+    lambda_runtime          = string
+    lambda_publish          = bool
+    lambda_timeout          = number
+    lambda_cw_log_retention = number
+    lambda_s3_prefix        = string
+    lambda_admin_user       = string
+    lambda_script_loop      = number
+    lambda_script_sleep     = number
+  }))
+  default = {}
+}
+
+## Layer
+variable "lambda_layer" {
+  description = "AWS Lambda layer"
+  type = map(object({
+    compatible_runtimes = list(string)
+  }))
+  default = {}
+}
+
+# AWS SNS
+variable "sns_config" {
+  description = "AWS SNS Configuration"
+  type        = any
+  default     = {}
+}
+
+# AWS SQS
+variable "sqs_config" {
+  description = "AWS SQS Configuration"
+  type = map(object({
+    delay_seconds              = number
+    visibility_timeout_seconds = number
+    managed_sse_enabled        = bool
+  }))
+  default = {}
 }

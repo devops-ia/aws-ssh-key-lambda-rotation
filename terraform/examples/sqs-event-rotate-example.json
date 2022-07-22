@@ -1,0 +1,10 @@
+{
+   "Records":[
+      {
+         "md5OfBody":"c4825e719135f30e2062689146348980",
+         "eventSource":"aws:sqs",
+         "eventSourceARN":"arn:aws:sqs:eu-west-1:111222333444:ssh-rotate-develop",
+         "awsRegion":"eu-west-1"
+      }
+   ]
+}
