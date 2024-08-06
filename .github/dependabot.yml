@@ -9,7 +9,15 @@ updates:
   - enhancement
   - dependency-management
 - package-ecosystem: terraform
-  directory: "/"
+  directory: "/terraform/"
+  schedule:
+    interval: monthly
+  open-pull-requests-limit: 10
+  labels:
+  - enhancement
+  - dependency-management
+- package-ecosystem: pip
+  directory: "/terraform/src"
   schedule:
     interval: monthly
   open-pull-requests-limit: 10
