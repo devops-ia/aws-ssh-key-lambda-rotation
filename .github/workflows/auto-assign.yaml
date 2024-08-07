@@ -15,5 +15,5 @@ jobs:
       - name: 'auto-assign issue'
         uses: pozil/auto-assign-issue@v2
         with:
-            repo-token: ${{ secrets.PAT_GITHUB }}
-            teams: devops-ia
+          repo-token: ${{ secrets.PAT_GITHUB }}
+          teams: devops-ia
