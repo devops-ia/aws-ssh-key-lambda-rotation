@@ -24,7 +24,7 @@ resource "aws_key_pair" "testing" {
 module "ec2_sample_rotate" {
   count   = var.testing_enabled ? 1 : 0
   source  = "terraform-aws-modules/ec2-instance/aws"
-  version = "~> 5.6"
+  version = "~> 6.0"
 
   name = "instance-${lower(local.global_name)}"
 
