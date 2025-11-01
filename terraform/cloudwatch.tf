@@ -2,7 +2,7 @@
 ## Cloudwatch Logs for AWS SSM Run Command output
 module "log_group_from_ssm" {
   source  = "terraform-aws-modules/cloudwatch/aws//modules/log-group"
-  version = "5.7.1"
+  version = "5.7.2"
 
   name              = "/aws/ssm/${lower(local.global_name)}"
   retention_in_days = var.log_group_from_ssm_retention
